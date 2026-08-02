@@ -75,7 +75,7 @@ This project focuses on:
 The following diagram illustrates the complete AWS architecture.
 
 <p align="center">
-  <img src="docs/aws-architechture.png" alt="AWS Architecture" width="900">
+  <img src="docs/aws-architecture.png" alt="AWS Architecture" width="900">
 </p>
 
 ---
