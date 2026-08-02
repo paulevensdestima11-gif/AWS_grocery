@@ -10,6 +10,12 @@ resource "aws_instance" "web" {
 
   associate_public_ip_address = true
 
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
+
   tags = {
     Name = "${var.project_name}-ec2"
   }

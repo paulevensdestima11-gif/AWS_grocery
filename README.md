@@ -1,349 +1,396 @@
-# GroceryMate
+## ☁️ AWS Grocery Application
 
-[Für das deutsche ReadMe hier klicken](#grocerymate-deutsch)
+<p align="center">
+  <!-- Add architecture image here later -->
+  <!-- <img src="docs/aws-architecture.png.png" alt="AWS Architecture" width="900"> -->
+</p>
 
-## 🏆 GroceryMate E-Commerce Platform
-
-[![Python](https://img.shields.io/badge/Language-Python%2C%20JavaScript-blue)](https://www.python.org/)
-[![OS](https://img.shields.io/badge/OS-Linux%2C%20Windows%2C%20macOS-green)](https://www.kernel.org/)
-[![Database](https://img.shields.io/badge/Database-PostgreSQL-336791)](https://www.postgresql.org/)
-[![GitHub Release](https://img.shields.io/github/v/release/AlejandroRomanIbanez/AWS_grocery)](https://github.com/AlejandroRomanIbanez/AWS_grocery/releases/tag/v2.0.0)
-[![Free](https://img.shields.io/badge/Free_for_Non_Commercial_Use-brightgreen)](#-license)
-
-⭐ **Star us on GitHub** — it motivates us a lot!
+<p align="center">
+A cloud-native Grocery Management Application built with <strong>AWS</strong>, <strong>Terraform</strong>, <strong>Docker</strong>, and <strong>PostgreSQL</strong>.
+</p>
 
 ---
 
-## 📌 Table of Contents
+## 📑 Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Screenshots & Demo](#-screenshots--demo)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-  - [Clone Repository](#-clone-repository)
-  - [Configure PostgreSQL](#-configure-postgresql)
-  - [Populate Database](#-populate-database)
-  - [Set Up Python Environment](#-set-up-python-environment)
-  - [Set Environment Variables](#-set-environment-variables)
-  - [Start the Application](#-start-the-application)
-- [Usage](#-usage)
-- [Contributing](#-contributing)
-- [License](#-license)
-
-## 🚀 Overview
-
-GroceryMate is an application developed as part of the Masterschools program by **Alejandro Roman Ibanez**. It is a modern, full-featured e-commerce platform designed for seamless online grocery shopping. It provides an intuitive user interface and a secure backend, allowing users to browse products, manage their shopping basket, and complete purchases efficiently.
-
-GroceryMate is a modern, full-featured e-commerce platform designed for seamless online grocery shopping. It provides an intuitive user interface and a secure backend, allowing users to browse products, manage their shopping basket, and complete purchases efficiently.
-
-## 🛒 Features
-
-- **🛡️ User Authentication**: Secure registration, login, and session management.
-- **🔒 Protected Routes**: Access control for authenticated users.
-- **🔎 Product Search & Filtering**: Browse products, apply filters, and sort by category or price.
-- **⭐ Favorites Management**: Save preferred products.
-- **🛍️ Shopping Basket**: Add, view, modify, and remove items.
-- **💳 Checkout Process**:
-  - Secure billing and shipping information handling.
-  - Multiple payment options.
-  - Automatic total price calculation.
-
-## 📸 Screenshots & Demo
-
-![imagen](https://github.com/user-attachments/assets/ea039195-67a2-4bf2-9613-2ee1e666231a)
-![imagen](https://github.com/user-attachments/assets/a87e5c50-5a9e-45b8-ad16-2dbff41acd00)
-![imagen](https://github.com/user-attachments/assets/589aae62-67ef-4496-bd3b-772cd32ca386)
-![imagen](https://github.com/user-attachments/assets/2772b85e-81f7-446a-9296-4fdc2b652cb7)
-
-https://github.com/user-attachments/assets/d1c5c8e4-5b16-486a-b709-4cf6e6cce6bc
-
-## 📋 Prerequisites
-
-Ensure the following dependencies are installed before running the application:
-
-- **🐍 Python (>=3.11)**
-- **🐘 PostgreSQL** – Database for storing product and user information.
-- **🛠️ Git** – Version control system.
-
-## ⚙️ Installation
-
-### 🔹 Clone Repository
-
-```sh
-git clone --branch version2 https://github.com/AlejandroRomanIbanez/AWS_grocery.git && cd AWS_grocery
-```
-
-### 🔹 Configure PostgreSQL
-
-Before creating the database user, you can choose a custom username and password to enhance security. Replace `<your_secure_password>` with a strong password of your choice in the following commands.
-
-Create database and user:
-
-```sh
-psql -U postgres -c "CREATE DATABASE grocerymate_db;"
-psql -U postgres -c "CREATE USER grocery_user WITH ENCRYPTED PASSWORD '<your_secure_password>';"  # Replace <your_secure_password> with a strong password of your choice
-psql -U postgres -c "ALTER USER grocery_user WITH SUPERUSER;"
-```
-
-### 🔹 Populate Database
-
-```sh
-psql -U grocery_user -d grocerymate_db -f backend/app/sqlite_dump_clean.sql
-```
-
-Verify insertion:
-
-```sh
-psql -U grocery_user -d grocerymate_db -c "SELECT * FROM users;"
-psql -U grocery_user -d grocerymate_db -c "SELECT * FROM products;"
-```
-
-### 🔹 Set Up Python Environment
-
-
-Install dependencies in an activated virtual Enviroment:
-
-```sh
-cd backend
-pip install -r requirements.txt
-```
-OR (if pip doesn't exist)
-```sh
-pip3 install -r requirements.txt
-```
-
-### 🔹 Set Environment Variables
-
-Create a `.env` file:
-
-```sh
-touch .env  # macOS/Linux
-ni .env -Force  # Windows
-```
-
-Generate a secure JWT key:
-
-```sh
-python3 -c "import secrets; print(secrets.token_hex(32))"
-```
-
-Update `.env`:
-
-```sh
-nano .env
-```
-
-Fill in the following information (make sure to replace the placeholders):
-
-```ini
-JWT_SECRET_KEY=<your_generated_key>
-POSTGRES_USER=grocery_user
-POSTGRES_PASSWORD=<your_password>
-POSTGRES_DB=grocerymate_db
-POSTGRES_HOST=localhost
-POSTGRES_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
-```
-
-### 🔹 Start the Application
-
-```sh
-python3 run.py
-```
-
-## 📖 Usage
-
-- Access the application at [http://localhost:5000](http://localhost:5000)
-- Register/Login to your account
-- Browse and search for products
-- Manage favorites and shopping basket
-- Proceed through the checkout process
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new feature branch (`feature/your-feature`).
-3. Implement your changes and commit them.
-4. Push your branch and create a pull request.
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
-# GroceryMate Deutsch
-
-## 🏆 GroceryMate E-Commerce-Plattform
-
-[![Python](https://img.shields.io/badge/Language-Python%2C%20JavaScript-blue)](https://www.python.org/)
-[![OS](https://img.shields.io/badge/OS-Linux%2C%20Windows%2C%20macOS-green)](https://www.kernel.org/)
-[![Database](https://img.shields.io/badge/Database-PostgreSQL-336791)](https://www.postgresql.org/)
-[![GitHub Release](https://img.shields.io/github/v/release/AlejandroRomanIbanez/AWS_grocery)](https://github.com/AlejandroRomanIbanez/AWS_grocery/releases/tag/v2.0.0)
-[![Free](https://img.shields.io/badge/Free_for_Non_Commercial_Use-brightgreen)](#-license)
-
-⭐ **Gib uns einen Stern auf GitHub** — das motiviert uns sehr!
+- [Project Overview](#-project-overview)
+- [Architecture](#-architecture)
+- [AWS Services Used](#-aws-services-used)
+- [Amazon EC2](#1-amazon-ec2)
+- [Amazon S3](#2-amazon-s3)
+- [Amazon RDS PostgreSQL](#3-amazon-rds-postgresql)
+- [Amazon VPC](#4-amazon-vpc)
+- [Internet Gateway](#5-internet-gateway)
+- [IAM Role](#6-iam-role)
+- [Infrastructure as Code - Terraform](#infrastructure-as-code---terraform)
+- [Terraform Deployment Process](#terraform-deployment-process)
+- [Docker Deployment](#docker-deployment)
+- [Application Workflow](#application-workflow)
+- [Security Implementation](#security-implementation)
+- [Deployment Guide](#deployment-guide)
+- [What I Learned](#-what-i-learned)
+- [Key Takeaways](#-key-takeaways)
+- [Future Improvements](#-future-improvements)
+- [Author](#author)
 
 ---
 
-## 📌 Inhaltsverzeichnis
+## 📖 Project Overview
 
-- [Übersicht](#ubersicht)
-- [Funktionen](#-funktionen)
-- [Bildschirmfotos & Demo](#-Bildschirmfotos--Demo)
-- [Voraussetzungen](#-Voraussetzungen)
-- [Installationsanleitung](#-Installationsanleitung)
-  - [Repository klonen](#-Repository-klonen)
-  - [PostgreSQL konfigurieren](#-PostgreSQL-konfigurieren)
-  - [Datenbank befüllen](#-Datenbank-befüllen)
-  - [Python-Umgebung einrichten](#-Python-Umgebung-einrichten)
-  - [Umgebungsvariablen setzen](#-Umgebungsvariablen-setzen)
-  - [Anwendung starten](#-Anwendung-starten)
-- [Benutzung](#-Benutzung)
-- [Mitwirken](#-Mitwirken)
-- [Lizenz](#-Lizenz)
+AWS Grocery is a cloud-native application designed to demonstrate how modern applications can be deployed using Amazon Web Services.
 
-## 🚀 Übersicht
+This project focuses on:
 
-GroceryMate ist eine Anwendung, die im Rahmen des Masterschools-Programms von **Alejandro Roman Ibanez** entwickelt wurde. Es handelt sich um eine moderne, voll ausgestattete E-Commerce-Plattform für ein nahtloses Online-Lebensmittelshopping. Sie bietet eine intuitive Benutzeroberfläche und ein sicheres Backend, mit dem Nutzer Produkte durchsuchen, ihren Warenkorb verwalten und Einkäufe effizient abschließen können.
+- Infrastructure as Code (Terraform)
+- Containerization with Docker
+- Amazon EC2 deployment
+- Amazon S3 object storage
+- Amazon RDS PostgreSQL
+- IAM security
+- AWS networking
+- Linux administration
 
-GroceryMate ist eine moderne, voll ausgestattete E-Commerce-Plattform für ein nahtloses Online-Lebensmittelshopping. Sie bietet eine intuitive Benutzeroberfläche und ein sicheres Backend, mit dem Nutzer Produkte durchsuchen, ihren Warenkorb verwalten und Einkäufe effizient abschließen können.
+---
 
-## 🛒 Funktionen
+## 🛠️ Technologies Used
 
-- **🛡️ Benutzerauthentifizierung**: Sichere Registrierung, Anmeldung und Sitzungsverwaltung.
-- **🔒 Geschützte Routen**: Zugriffskontrolle für authentifizierte Nutzer.
-- **🔎 Produktsuche & Filter**: Produkte durchsuchen, Filter anwenden und nach Kategorie oder Preis sortieren.
-- **⭐ Favoritenverwaltung**: Bevorzugte Produkte speichern.
-- **🛍️ Warenkorb**: Artikel hinzufügen, anzeigen, ändern und entfernen.
-- **💳 Checkout-Prozess**:
-  - Sichere Verarbeitung von Rechnungs- und Lieferinformationen.
-  - Mehrere Zahlungsoptionen.
-  - Automatische Berechnung des Gesamtpreises.
+| Category | Technology |
+|----------|------------|
+| Cloud Provider | AWS |
+| Infrastructure as Code | Terraform |
+| Compute | Amazon EC2 |
+| Storage | Amazon S3 |
+| Database | Amazon RDS PostgreSQL |
+| Containerization | Docker |
+| Programming Language | Python |
+| Framework | Flask |
+| Database ORM | SQLAlchemy |
+| Version Control | Git & GitHub |
+| Operating System | Amazon Linux |
 
-## 📸 Bildschirmfotos & Demo
+---
 
-![imagen](https://github.com/user-attachments/assets/ea039195-67a2-4bf2-9613-2ee1e666231a)
-![imagen](https://github.com/user-attachments/assets/a87e5c50-5a9e-45b8-ad16-2dbff41acd00)
-![imagen](https://github.com/user-attachments/assets/589aae62-67ef-4496-bd3b-772cd32ca386)
-![imagen](https://github.com/user-attachments/assets/2772b85e-81f7-446a-9296-4fdc2b652cb7)
+## 🏗️ Architecture
 
-https://github.com/user-attachments/assets/d1c5c8e4-5b16-486a-b709-4cf6e6cce6bc
+The following diagram illustrates the complete AWS architecture.
 
-## 📋 Voraussetzungen
+<p align="center">
+  <img src="docs/aws-architecture.png.png" alt="AWS Architecture" width="900">
+</p>
 
-Stelle sicher, dass die folgenden Abhängigkeiten installiert sind, bevor du die Anwendung ausführst:
+---
 
-- **🐍 Python (>=3.11)**
-- **🐘 PostgreSQL** – Datenbank zur Speicherung von Produkt- und Benutzerinformationen.
-- **🛠️ Git** – Versionskontrollsystem.
+## ☁️ AWS Services Used
 
-## ⚙️ Installationsanleitung
+| AWS Service | Purpose |
+|-------------|---------|
+| Amazon EC2 | Hosts the backend application |
+| Amazon S3 | Stores user avatar images |
+| Amazon RDS | Managed PostgreSQL database |
+| Amazon VPC | Private cloud network |
+| Internet Gateway | Provides internet access |
+| IAM | Secure permissions management |
+| Security Groups | Virtual firewall |
+| Terraform | Infrastructure as Code |
+| Docker | Containerized application |
 
-### 🔹 Repository klonen
+---
 
-```sh
-git clone --branch version2 https://github.com/AlejandroRomanIbanez/AWS_grocery.git && cd AWS_grocery
+## 1. Amazon EC2
+
+### Purpose
+
+Amazon EC2 provides the virtual server where the backend application runs.
+
+The application is deployed inside a Docker container running on the EC2 instance.
+
+### Configuration
+
+- **Instance Type:** `t2.micro`
+- **Operating System:** Amazon Linux
+- **Subnet:** Public Subnet
+
+### Security Group
+
+The EC2 Security Group allows the following inbound traffic:
+
+| Port | Protocol | Purpose |
+|------|----------|---------|
+| 22 | SSH | Remote administration |
+| 80 | HTTP | Web traffic |
+| 5000 | TCP | Flask Backend API |
+
+---
+
+## 2. Amazon S3
+
+### Purpose
+
+Amazon S3 stores user-uploaded profile images.
+
+<p align="center">
+  <img src="docs/s3-architecture" alt="s3_architecture" width="900">
+</p>
+
+### Security
+
+The application never stores images locally.
+
+Instead, the workflow is:
+
+1. User uploads an image.
+2. Backend API receives the image.
+3. Backend uploads the image to Amazon S3.
+4. The database stores only the image reference.
+
+---
+
+## 3. Amazon RDS PostgreSQL
+
+### Purpose
+
+Amazon RDS provides a managed PostgreSQL database.
+
+Instead of installing PostgreSQL on the EC2 instance, AWS manages:
+
+- Database maintenance
+- Automatic backups
+- Software updates
+- High availability
+
+### Database Stores
+
+- User information
+- Application data
+- User relationships
+
+---
+
+## 4. Amazon VPC
+
+### Purpose
+
+The Amazon VPC creates an isolated network for all AWS resources.
+
+### Network Configuration
+
+| Resource | Value |
+|----------|-------|
+| VPC CIDR | `10.0.0.0/16` |
+| Public Subnet | `10.0.1.0/24` |
+| Private Subnet | `10.0.2.0/24` |
+
+---
+
+## 5. Internet Gateway
+
+### Purpose
+
+The Internet Gateway allows resources inside the public subnet to communicate with the Internet.
+
+<p align="center">
+  <img src="docs/networking.png" alt="Internet Gateway" width="300">
+</p>
+
+---
+
+## 6. IAM Role
+
+### Purpose
+
+IAM controls permissions between AWS services.
+
+### IAM Role
+
+`grocery-ec2-role`
+
+### Responsibilities
+
+- Allows EC2 to access Amazon S3 securely.
+- Eliminates the need to store AWS credentials inside the application.
+- Implements the Principle of Least Privilege.
+
+---
+
+## Infrastructure as Code - Terraform
+
+Terraform was used to provision the AWS infrastructure automatically rather than creating resources manually through the AWS Console.
+
+### Resources Created
+
+- Amazon VPC
+- Public Subnet
+- Internet Gateway
+- Route Table
+- Security Group
+- Amazon EC2
+- Amazon S3 Bucket
+
+---
+
+## Terraform Deployment Process
+
+### 1. Initialize Terraform
+
+```bash
+terraform init
 ```
 
-### 🔹 PostgreSQL konfigurieren
+Downloads the required providers and initializes the working directory.
 
-Bevor du den Datenbankbenutzer erstellst, kannst du einen benutzerdefinierten Benutzernamen und ein Passwort wählen, um die Sicherheit zu erhöhen. Ersetze `<your_secure_password>` in den folgenden Befehlen durch ein starkes Passwort deiner Wahl.
+---
 
-Datenbank und Benutzer erstellen:
+### 2. Validate the Configuration
 
-```sh
-psql -U postgres -c "CREATE DATABASE grocerymate_db;"
-psql -U postgres -c "CREATE USER grocery_user WITH ENCRYPTED PASSWORD '<your_secure_password>';"  # Ersetze <your_secure_password> durch ein starkes Passwort deiner Wahl
-psql -U postgres -c "ALTER USER grocery_user WITH SUPERUSER;"
+```bash
+terraform validate
 ```
 
-### 🔹 Datenbank befüllen
+Verifies that the Terraform configuration is syntactically correct.
 
-```sh
-psql -U grocery_user -d grocerymate_db -f backend/app/sqlite_dump_clean.sql
+---
+
+### 3. Review the Execution Plan
+
+```bash
+terraform plan
 ```
 
-Einfügungen überprüfen:
+Displays the resources that Terraform will create or modify.
 
-```sh
-psql -U grocery_user -d grocerymate_db -c "SELECT * FROM users;"
-psql -U grocery_user -d grocerymate_db -c "SELECT * FROM products;"
+---
+
+### 4. Deploy the Infrastructure
+
+```bash
+terraform apply
 ```
 
-### 🔹 Python-Umgebung einrichten
+Creates all AWS resources defined in the Terraform configuration.
 
+---
 
-Abhängigkeiten in einer aktivierten virtuellen Umgebung installieren:
+## Docker Deployment
 
-```sh
-cd backend
-pip install -r requirements.txt
-```
-ODER (falls pip nicht existiert)
-```sh
-pip3 install -r requirements.txt
-```
+The backend application is containerized using Docker.
 
-### 🔹 Umgebungsvariablen setzen
+### Build the Docker Image
 
-Eine .env-Datei erstellen:
-
-```sh
-touch .env  # macOS/Linux
-ni .env -Force  # Windows
+```bash
+docker build -t grocery-app .
 ```
 
-Einen sicheren JWT-Schlüssel generieren:
+### Run the Container
 
-```sh
-python3 -c "import secrets; print(secrets.token_hex(32))"
+```bash
+docker run \
+  --network host \
+  -e POSTGRES_USER=grocery_user \
+  -e POSTGRES_PASSWORD=REMOVED_SECRET \
+  -e POSTGRES_DB=grocery \
+  grocery-app
 ```
 
-.env-Datei aktualisieren:
+---
 
-```sh
-nano .env
+## Application Workflow
+
+### User Registration
+
+```text
+User
+   │
+   ▼
+Frontend
+   │
+   ▼
+Flask Backend
+   │
+   ▼
+Amazon RDS
+   │
+   ▼
+User Created
 ```
 
-Fülle die folgenden Informationen aus (stelle sicher, dass du die Platzhalter ersetzt):
+<p align="center">
+  <img src="docs/user_registration.png" alt="Internet Gateway" width="150">
+</p>
 
-```ini
-JWT_SECRET_KEY=<your_generated_key>
-POSTGRES_USER=grocery_user
-POSTGRES_PASSWORD=<your_secure_password>
-POSTGRES_DB=grocerymate_db
-POSTGRES_HOST=localhost
-POSTGRES_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
+---
+
+### Avatar Upload
+
+<p align="center">
+  <img src="docs/avatar_upload.png" alt="Avatar Upload" width="900">
+</p>
+
+```text
+User
+   │
+   ▼
+Backend API
+   │
+   ▼
+AWS SDK (Boto3)
+   │
+   ▼
+Amazon S3
+   │
+   ▼
+avatars/
 ```
 
-### 🔹 Anwendung starten
+---
 
-```sh
-python3 run.py
-```
+## Security Implementation
 
-## 📖 Benutzung
+### IAM
 
-- Greife auf die Anwendung unter [http://localhost:5000](http://localhost:5000) zu
-- Registriere dich oder melde dich bei deinem Konto an
-- Durchsuche und finde Produkte
-- Verwalte Favoriten und den Warenkorb
-- Durchlaufe den Checkout-Prozess
+- EC2 uses an IAM Role to access Amazon S3.
+- No AWS Access Keys are stored inside the application.
+- Least Privilege permissions are applied.
 
-## 🤝 Mitwirken
+### Network Security
 
-Beiträge zu diesem Projekt sind willkommen! Bitte folge diesen Schritten:
+- Resources are deployed inside an Amazon VPC.
+- Security Groups restrict inbound traffic.
+- Only the required ports are exposed.
 
-1. Forke das Repository.
-2. Erstelle einen neuen Feature-Branch (`feature/your-feature`).
-3. Implementiere deine Änderungen und committe sie.
-4. Pushe deinen Branch und erstelle einen Pull-Request.
+### Database Security
 
-## 📜 Lizenz
+- Amazon RDS is isolated from direct internet access.
+- The application communicates securely with the database.
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert.
+---
 
+### Challenges & Solutions
 
+Throughout this project, several real-world cloud engineering challenges were encountered and resolved.
 
+| Challenge | Solution |
+|-----------|----------|
+| AWS SSO authentication | Configured AWS CLI using AWS Identity Center |
+| Docker networking | Used the host network to enable communication with PostgreSQL |
+| EC2 permissions | Attached an IAM Role instead of storing AWS credentials |
+| S3 uploads | Configured IAM policies and verified bucket permissions |
+| Terraform deployment | Validated infrastructure using `terraform validate` and `terraform plan` before applying changes |
 
+---
+
+### 👨‍💻 Author
+
+**Paul Evens Destima**
+
+Junior Cloud Engineer
+
+### Technical Skills
+
+- AWS
+- Terraform
+- Docker
+- Python
+- Flask
+- PostgreSQL
+- Linux
+- Git
