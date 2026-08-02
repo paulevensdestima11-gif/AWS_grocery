@@ -75,7 +75,7 @@ This project focuses on:
 The following diagram illustrates the complete AWS architecture.
 
 <p align="center">
-  <img src="docs/aws-architecture.png.png" alt="AWS Architecture" width="900">
+  <img src="docs/aws-architechture.png" alt="AWS Architecture" width="900">
 </p>
 
 ---
@@ -129,7 +129,7 @@ The EC2 Security Group allows the following inbound traffic:
 Amazon S3 stores user-uploaded profile images.
 
 <p align="center">
-  <img src="docs/s3-architecture" alt="s3_architecture" width="900">
+  <img src="docs/s3-architecture.png" alt="s3-architecture" width="200">
 </p>
 
 ### Security
