@@ -286,7 +286,7 @@ docker build -t grocery-app .
 docker run \
   --network host \
   -e POSTGRES_USER=grocery_user \
-  -e POSTGRES_PASSWORD=REMOVED_SECRET \
+  -e POSTGRES_PASSWORD=<DB_PASSWORD> \
   -e POSTGRES_DB=grocery \
   grocery-app
 ```
