@@ -20,12 +20,13 @@ resource "aws_security_group" "ec2" {
   }
 
   ingress {
-    description = "Allow SSH"
-    from_port   = 22
-    to_port     = 22
+    description = "Allow application traffic"
+    from_port   = 5000
+    to_port     = 5000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
 
   egress {
     description = "Allow all outbound traffic"
