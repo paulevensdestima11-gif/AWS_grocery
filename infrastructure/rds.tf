@@ -78,7 +78,7 @@ resource "aws_db_instance" "postgres" {
 
   db_name  = "grocerymate_db"
   username = "grocery_user"
-  password = "REMOVED_SECRET"
+  password = var.db_password
 
   vpc_security_group_ids = [
     aws_security_group.rds.id
