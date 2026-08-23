@@ -3,7 +3,7 @@
 resource "aws_subnet" "rds_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "eu-central-1a"
+  availability_zone = var.availability_zones[0]
 
   tags = {
     Name = "${var.project_name}-rds-subnet-a"
@@ -14,7 +14,7 @@ resource "aws_subnet" "rds_a" {
 resource "aws_subnet" "rds_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.3.0/24"
-  availability_zone = "eu-central-1b"
+  availability_zone = var.availability_zones[1]
 
   tags = {
     Name = "${var.project_name}-rds-subnet-b"
@@ -83,7 +83,7 @@ resource "aws_db_instance" "postgres" {
   engine         = "postgres"
   engine_version = "15"
 
-  instance_class = "db.t3.micro"
+  instance_class = var.rds_instance_class
 
   allocated_storage = 20
 

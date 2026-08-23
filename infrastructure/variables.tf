@@ -13,3 +13,19 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "ec2_instance_type" {
+  description = "EC2 instance type"
+  type        = string
+}
+
+variable "rds_instance_class" {
+  description = "RDS instance class"
+  type        = string
+}
+
+variable "availability_zones" {
+  description = "Availability zones used by the infrastructure"
+  type        = list(string)
+}
+
