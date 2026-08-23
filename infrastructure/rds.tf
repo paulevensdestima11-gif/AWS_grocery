@@ -1,17 +1,25 @@
 # RDS Subnet - Second Availability Zone
+# RDS Private Subnet A
+resource "aws_subnet" "rds_a" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.2.0/24"
+  availability_zone = "eu-central-1a"
+
+  tags = {
+    Name = "${var.project_name}-rds-subnet-a"
+  }
+}
+
+# RDS Private Subnet B
 resource "aws_subnet" "rds_b" {
-
-  vpc_id = aws_vpc.main.id
-
-  cidr_block = "10.0.2.0/24"
-
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.3.0/24"
   availability_zone = "eu-central-1b"
 
   tags = {
     Name = "${var.project_name}-rds-subnet-b"
   }
 }
-
 
 # RDS Security Group
 resource "aws_security_group" "rds" {
@@ -50,16 +58,19 @@ resource "aws_security_group" "rds" {
 
 # RDS Subnet Group
 resource "aws_db_subnet_group" "postgres" {
-
-  name = "aws-grocery-db-subnet-group"
+  name = "aws-grocery-db-subnet-group-v2"
 
   subnet_ids = [
-    aws_subnet.public.id,
+    aws_subnet.rds_a.id,
     aws_subnet.rds_b.id
   ]
 
   tags = {
-    Name = "aws-grocery-db-subnet-group"
+    Name = "aws-grocery-db-subnet-group-v2"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
