@@ -1,7 +1,7 @@
 # ☁️ AWS Grocery Application
 
 <p align="center">
-  <img src="docs/aws-architecture.png" alt="AWS Architecture" width="900">
+  <img src="docs/aws_architecture.jpeg" alt="AWS Architecture" width="900">
 </p>
 
 <p align="center">
@@ -88,7 +88,7 @@ The architecture contains:
 * AWS Systems Manager Session Manager for EC2 administration
 
 <p align="center">
-  <img src="docs/aws-architecture.png" alt="AWS Architecture" width="900">
+  <img src="docs/aws_architecture.jpeg" alt="AWS Architecture" width="900">
 </p>
 
 ---
@@ -156,7 +156,7 @@ The project uses the following bucket:
 `grocerymate-paul-avatars-2026`
 
 <p align="center">
-  <img src="docs/s3-architecture.png" alt="S3 Architecture" width="300">
+  <img src="docs/s3_architecture.jpeg" alt="S3 Architecture" width="300">
 </p>
 
 ## Security
@@ -477,7 +477,7 @@ User Created
 ```
 
 <p align="center">
-  <img src="docs/user_registration.png" alt="User Registration" width="300">
+  <img src="docs/user_registration.jpeg" alt="User Registration" width="300">
 </p>
 
 ---
@@ -485,7 +485,7 @@ User Created
 ## Avatar Upload
 
 <p align="center">
-  <img src="docs/avatar_upload.png" alt="Avatar Upload" width="900">
+  <img src="docs/avatar_upload.jpeg" alt="Avatar Upload" width="900">
 </p>
 
 ```text
