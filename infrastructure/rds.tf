@@ -2,7 +2,7 @@
 # RDS Private Subnet A
 resource "aws_subnet" "rds_a" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
+  cidr_block        = var.rds_subnet_a_cidr
   availability_zone = var.availability_zones[0]
 
   tags = {
@@ -13,7 +13,7 @@ resource "aws_subnet" "rds_a" {
 # RDS Private Subnet B
 resource "aws_subnet" "rds_b" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.3.0/24"
+  cidr_block        = var.rds_subnet_b_cidr
   availability_zone = var.availability_zones[1]
 
   tags = {
@@ -30,8 +30,8 @@ resource "aws_security_group" "rds" {
 
   ingress {
     description = "PostgreSQL from EC2"
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = var.db_port
+    to_port     = var.db_port
     protocol    = "tcp"
 
     security_groups = [
@@ -58,7 +58,7 @@ resource "aws_security_group" "rds" {
 
 # RDS Subnet Group
 resource "aws_db_subnet_group" "postgres" {
-  name = "aws-grocery-db-subnet-group-v2"
+  name = var.db_subnet_group_name
 
   subnet_ids = [
     aws_subnet.rds_a.id,
@@ -66,7 +66,7 @@ resource "aws_db_subnet_group" "postgres" {
   ]
 
   tags = {
-    Name = "aws-grocery-db-subnet-group-v2"
+    Name = var.db_subnet_group_name
   }
 
   lifecycle {
@@ -78,17 +78,17 @@ resource "aws_db_subnet_group" "postgres" {
 # PostgreSQL RDS Instance
 resource "aws_db_instance" "postgres" {
 
-  identifier = "grocerymate-db"
+  identifier = var.db_identifier
 
-  engine         = "postgres"
-  engine_version = "15"
+  engine         = var.db_engine
+  engine_version = var.db_engine_version
 
   instance_class = var.rds_instance_class
 
-  allocated_storage = 20
+  allocated_storage = var.db_allocated_storage
 
-  db_name  = "grocerymate_db"
-  username = "grocery_user"
+  db_name  = var.db_name
+  username = var.db_username
   password = var.db_password
 
   vpc_security_group_ids = [

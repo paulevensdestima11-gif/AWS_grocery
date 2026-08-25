@@ -21,8 +21,8 @@ resource "aws_security_group" "ec2" {
 
   ingress {
     description = "Allow application traffic"
-    from_port   = 5000
-    to_port     = 5000
+    from_port   = var.app_port
+    to_port     = var.app_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

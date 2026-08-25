@@ -36,7 +36,7 @@ resource "aws_iam_role_policy" "ec2_s3" {
           "s3:ListBucket"
         ]
 
-        Resource = "arn:aws:s3:::grocerymate-paul-avatars-2026"
+        Resource = "arn:aws:s3:::${var.avatars_bucket_name}"
       },
       {
         Sid    = "ManageAvatarObjects"
@@ -48,7 +48,7 @@ resource "aws_iam_role_policy" "ec2_s3" {
           "s3:DeleteObject"
         ]
 
-        Resource = "arn:aws:s3:::grocerymate-paul-avatars-2026/*"
+        Resource = "arn:aws:s3:::${var.avatars_bucket_name}/*"
       }
     ]
   })

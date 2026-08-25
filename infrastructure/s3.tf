@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "avatars" {
-  bucket = "grocerymate-paul-avatars-2026"
+  bucket = var.avatars_bucket_name
 
   tags = {
-    Name        = "grocerymate-avatars"
-    Environment = "Dev"
+    Name        = var.avatars_bucket_display_name
+    Environment = var.environment
   }
 }
 
