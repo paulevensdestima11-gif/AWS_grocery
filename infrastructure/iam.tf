@@ -38,6 +38,18 @@ resource "aws_iam_role_policy" "ec2_s3" {
 
         Resource = "arn:aws:s3:::${var.avatars_bucket_name}"
       },
+
+      {
+        Sid    = "PublishUserRegistration"
+        Effect = "Allow"
+
+        Action = [
+          "sns:Publish"
+        ]
+
+        Resource = aws_sns_topic.user_registration.arn
+      },
+
       {
         Sid    = "ManageAvatarObjects"
         Effect = "Allow"
@@ -63,3 +75,4 @@ resource "aws_iam_instance_profile" "ec2" {
   name = "grocery-ec2-role"
   role = aws_iam_role.ec2.name
 }
+

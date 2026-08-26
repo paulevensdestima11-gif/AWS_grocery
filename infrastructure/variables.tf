@@ -108,3 +108,8 @@ variable "avatars_bucket_display_name" {
   description = "Deployment environment"
   type        = string
 }
+
+variable "sns_notification_email" {
+  description = "Endpoint"
+  type        = string
+}
