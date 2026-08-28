@@ -113,3 +113,8 @@ variable "sns_notification_email" {
   description = "Endpoint"
   type        = string
 }
+
+variable "profile_admin" {
+  description = "AWS CLI profile used by Terraform"
+  type        = string
+}
